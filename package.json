@@ -1,0 +1,45 @@
+{
+  "name": "apidoc-plugin-ts",
+  "version": "0.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "copy:plugin": "copyfiles package.json './dist/**/*' node_modules/apidoc-plugin-typescript/",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "rm -rf dist && tsc -p src/tsconfig.json",
+    "prepublish": "npm run prepare && npm run copy:plugin && npm run docs",
+    "docs": "rm -rf test/out && apidoc -i test/ -o test/out"
+  },
+  "author": "Thomas Grey",
+  "license": "MIT",
+  "engines": {
+    "node": ">=6"
+  },
+  "bugs": {
+    "url": "https://github.com/tgreyuk/apidoc-plugin-ts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tgreyuk/apidoc-plugin-ts.git"
+  },
+  "keywords": [
+    "apidoc",
+    "apidoc plugin",
+    "typescript"
+  ],
+  "peerDependencies": {
+    "apidoc": "^0.17.6"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.9",
+    "apidoc": "^0.17.6",
+    "copyfiles": "^1.2.0",
+    "typescript": "2.4.1"
+  },
+  "dependencies": {
+    "ts-simple-ast": "^0.43.0"
+  }
+}

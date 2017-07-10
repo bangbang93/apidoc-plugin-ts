@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitHelpers": false,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "removeComments": true,
+    "sourceMap": false,
+    "strictNullChecks": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "es5",
+    "lib": [
+      "es2016",
+      "dom"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "node"
+    ]
+  }
+}
