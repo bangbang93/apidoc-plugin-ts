@@ -4,9 +4,13 @@ export interface Employer {
    */
   jobTitle: string;
   /**
-   * The person object
+   * The IPerson Interface
    */
   person: Person;
+  /**
+   * An array of ISkill interfaces
+   */
+  skills: Skill[];
 }
 
 export interface Person {
@@ -19,7 +23,40 @@ export interface Person {
    */
   age: number;
   /**
-   * The persons Address
+   * The Address Object
    */
-  address: string;
+  address: {
+    /**
+     * Address line 1
+     */
+    address_line_1: string;
+    /**
+     * Postcode
+     */
+    postcode: number;
+    /**
+     * Location
+     */
+    location: Location
+  };
+}
+
+export interface Skill {
+  description: string;
+  level: number;
+}
+
+export interface Location {
+  /**
+   * Country
+   */
+  country: string;
+  city: string;
+  region: {
+    a: string;
+    /**
+     * b prop
+     */
+    b: string;
+  };
 }

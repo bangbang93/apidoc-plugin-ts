@@ -7,13 +7,14 @@
     "dist/"
   ],
   "scripts": {
-    "copy:plugin": "copyfiles package.json './dist/**/*' node_modules/apidoc-plugin-typescript/",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "apidoc": "apidoc -i test/ -o test/out",
+    "lint": "tslint --type-check --project tsconfig.json",
+    "test": "mocha -r ts-node/register test/**/test.ts",
     "prepare": "rm -rf dist && tsc -p src/tsconfig.json",
-    "prepublish": "npm run prepare && npm run copy:plugin && npm run docs",
-    "docs": "rm -rf test/out && apidoc -i test/ -o test/out"
+    "prepublish": "npm run prepare && npm run lint && npm run test",
+    "pretest": "rm -rf test/out && npm run apidoc"
   },
-  "author": "Thomas Grey",
+  "author": "Tom Grey",
   "license": "MIT",
   "engines": {
     "node": ">=6"
@@ -34,12 +35,17 @@
     "apidoc": "^0.17.6"
   },
   "devDependencies": {
-    "@types/node": "^8.0.9",
+    "@types/chai": "^4.0.1",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^8.0.10",
     "apidoc": "^0.17.6",
-    "copyfiles": "^1.2.0",
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2",
+    "ts-node": "^3.2.0",
+    "tslint": "^5.5.0",
     "typescript": "2.4.1"
   },
   "dependencies": {
-    "ts-simple-ast": "^0.43.0"
+    "ts-simple-ast": "^0.44.1"
   }
 }

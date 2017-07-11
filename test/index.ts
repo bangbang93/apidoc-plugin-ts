@@ -1,67 +1,40 @@
-import {Employer} from './interfaces';
+import { Employer } from './interfaces';
 
-interface Params {
-    /**
-     * the id
-     */
-    id: number;
+interface Shape {
+    color: string;
+    radius: number;
 }
 
-interface Props {
-    /**
-     * Name
-     */
-    name: string;
-    /**
-     * Position
-     */
-    position: string;
-    /**
-     * Height
-     */
-    height: number;
+interface Square extends Shape {
+    sideLength: number;
 }
 
 /**
- * @api {get} /user/:id
- * @apiGroup DefaultTest
- * @apiSuccess {Boolean} active        Specify if the account is active.
- * @apiSuccess {Object}  profile       User profile information.
- * @apiSuccess {Number}  profile.age   Users age.
- * @apiSuccess {String}  profile.image Avatar-Image.
- * @apiSuccess {String}  profile.image.width Avatar-Image width
- * @apiSuccess {String}  profile.image.height Avatar-Image height
- */
- export function test1(){
-     return false;
- }
-
-  /**
  * @api {get} /api/:id
  * @apiParam {Number} id Unique ID.
- * @apiInterface {Props} apiSuccess
- * @apiGroup LocalInterfaceTest
+ * @apiInterface {Square}
+ * @apiGroup localInterfaceTest
  */
- export function test2(){
-     return false;
- }
+export function localInterfaceTest() {
+  return false;
+}
+
+/**
+ * @api {get} /api/:id
+ * @apiParam {Number} id Unique ID.
+ * @apiInterface (./test/interfaces.ts) { Employer }
+ * @apiGroup importedInterfaceTest
+ */
+export function importedInterfaceTest() {
+  return false;
+}
 
 /**
  * @api {get} /api/:id
  * @apiParam {Number} id Unique ID.
- * @apiInterface { Employer } apiSuccess
- * @apiGroup ImportedInterfaceTest
+ * @apiInterface {X}
+ * @apiGroup notFoundTest
  */
- export function test3(){
-     return false;
- }
-
- /**
- * @api {get} /api/:id
- * @apiParam {Number} id Unique ID.
- * @apiInterface {X} apiSuccess
- * @apiGroup NotFoundTest
- */
- export function test4(){
-     return false;
- }
+export function notFoundTest() {
+  return false;
+}

@@ -1,0 +1,216 @@
+[
+  {
+    "type": "get",
+    "url": "/api/:id",
+    "title": "",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "jobTitle",
+            "description": "<p>The job title string</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Iperson",
+            "optional": false,
+            "field": "person",
+            "description": "<p>The IPerson Interface</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "person.name",
+            "description": "<p>The name of the person</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "person.age",
+            "description": "<p>The age of the person</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Address",
+            "optional": false,
+            "field": "person.address",
+            "description": "<p>The Address Object</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "person.address.address_line_1",
+            "description": "<p>Address line 1</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "person.address.postcode",
+            "description": "<p>Postcode</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Ilocation",
+            "optional": false,
+            "field": "person.address.location",
+            "description": "<p>Location</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "person.address.location.country",
+            "description": "<p>Country</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "person.address.location.city",
+            "description": "<p> </p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Region",
+            "optional": false,
+            "field": "person.address.location.region",
+            "description": "<p> </p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "person.address.location.region.a",
+            "description": "<p> </p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "person.address.location.region.b",
+            "description": "<p>b prop</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Iskill[]",
+            "optional": false,
+            "field": "skills",
+            "description": "<p>An array of ISkill interfaces</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "skills.description",
+            "description": "<p> </p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "skills.level",
+            "description": "<p> </p>"
+          }
+        ]
+      }
+    },
+    "group": "importedInterfaceTest",
+    "version": "0.0.0",
+    "filename": "test/index.ts",
+    "groupTitle": "importedInterfaceTest",
+    "name": "GetApiId"
+  },
+  {
+    "type": "get",
+    "url": "/api/:id",
+    "title": "",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "position",
+            "description": "<p>Position</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "height",
+            "description": "<p>Height</p>"
+          }
+        ]
+      }
+    },
+    "group": "localInterfaceTest",
+    "version": "0.0.0",
+    "filename": "test/index.ts",
+    "groupTitle": "localInterfaceTest",
+    "name": "GetApiId"
+  },
+  {
+    "type": "get",
+    "url": "/api/:id",
+    "title": "",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique ID.</p>"
+          }
+        ]
+      }
+    },
+    "group": "notFoundTest",
+    "version": "0.0.0",
+    "filename": "test/index.ts",
+    "groupTitle": "notFoundTest",
+    "name": "GetApiId"
+  }
+]

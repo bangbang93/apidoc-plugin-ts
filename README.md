@@ -5,6 +5,7 @@
 [![Greenkeeper badge](https://badges.greenkeeper.io/tgreyuk/apidoc-plugin-ts.svg)](https://greenkeeper.io/)
 
 A plugin for [apidoc](https://www.npmjs.com/package/apidoc) that injects @apiSuccess properties from TypeScript interfaces.
+Supports nested interfaces and objects.
 
 ## Getting started
 
@@ -12,67 +13,57 @@ A plugin for [apidoc](https://www.npmjs.com/package/apidoc) that injects @apiSuc
 npm install --save-dev apidoc apidoc-plugin-ts
 ```
 
-### How to use
+A custom api-doc param "@apiInterface" is the exposed:
 
 ```
-@apiInterface {INTERFACE_NAME}
+@apiInterface (optional path) {INTERFACE_NAME}
  ```
 
- ## Example
+
+
+ ## How to use
+
+Given the following interface:
 
  ```
+filename: ./employers.ts
+
 export interface Employer {
   /**
-   * The job title string
+   * Employer job title
    */
   jobTitle: string;
   /**
-   * The department string
+   * Employer personal details
    */
-  department
-  /**
-   * The person object
-   */
-  person: Person;
+  personalDetails: {
+    name: string;
+    age: number;
+  }
 }
-
-export interface Person {
-  /**
-   * The name of the person
-   */
-  name: string;
-  /**
-   * The age of the person
-   */
-  age: number;
-  /**
-   * The persons Address
-   */
-  address: {
-    /**
-    * Address line 1
-    */
-    address_line_1: string;
-    /**
-    * Address postcode
-    */
-    postcode: string;
-  }  
-};
-
 ```
 
-### Input
+and the following custom param:
 
 ```
 /**
- * @api {get} /user/:id Request Person
- * @apiName GetPerson
- * @apiGroup Person
- *
- * @apiParam {Number} id Person's unique ID.
- * @apiInterface {Person} apiSuccess
+ * @apiInterface (./employers.ts) {Person}
  */
  ```
 
- ### Output
+ under the hood this would transpile to:
+
+ ```
+ @apiSuccess {String} jobTitle Job title
+ @apiSuccess {Object} personalDetails Empoyer personal details
+ @apiSuccess {String} personalDetails.name 
+ @apiSuccess {Number} personalDetails.age 
+```
+
+ *Note if the Person interface is defined in the same file then drop the path:*
+
+ ```
+ @apiInterface {Person}
+ ```
+
+ ### Example
