@@ -5,7 +5,7 @@
 [![Greenkeeper badge](https://badges.greenkeeper.io/tgreyuk/apidoc-plugin-ts.svg)](https://greenkeeper.io/)
 
 A plugin for [apidoc](https://www.npmjs.com/package/apidoc) that injects @apiSuccess properties from TypeScript interfaces.
-Supports extended and nested interfaces and objects.
+Supports extended and nested interfaces.
 
 ## Getting started
 
@@ -21,7 +21,7 @@ A custom api-doc param "@apiInterface" is the exposed:
 
 
 
- ## How to use
+ ### How to use
 
 Given the following interface:
 
@@ -64,6 +64,4 @@ and the following custom param:
 
  ```
  @apiInterface {Person}
- ```
-
- ### Example
+  ```
