@@ -1,8 +1,4 @@
-import * as fs from 'fs';
-import * as path from 'path';
 import Ast from 'ts-simple-ast';
-import { createWrappedNode, InterfaceDeclaration, PropertySignature, Symbol } from 'ts-simple-ast';
-import * as ts from 'typescript';
 
 const ast = new Ast();
 
@@ -41,15 +37,17 @@ function parseElements(elements, element, block, filename) {
     // does the interface exist in current file?
     const matchedInterface = getInterface(interfacePath, namedInterface);
 
+    // create array of new elements
+    const newElements = [];
+
     // if interface found do something with it
     if (matchedInterface) {
 
-      // create array of new elements
-      const newElements = [];
+      // if this is an extended interface
+      extendInterface(matchedInterface, interfacePath, newElements, values);
 
+      // match elemenets of current interface
       setElements(matchedInterface, interfacePath, newElements, values);
-
-      // console.log(newElements);
 
       // push new elements into existing elements
       for (let i = 0, l = newElements.length; i < l; i++) {
@@ -63,6 +61,23 @@ function parseElements(elements, element, block, filename) {
   }
 
   return elements;
+}
+
+/**
+ * Extends the current interface
+ * @param matchedInterface
+ * @param interfacePath
+ * @param newElements
+ * @param values
+ */
+function extendInterface(matchedInterface, interfacePath, newElements, values) {
+  const extendedInterface = matchedInterface.getExtends()[0];
+  if (extendedInterface) {
+    const extendedInterfaceName = matchedInterface.getExtends()[0].compilerNode.expression.getText();
+    const matchedExtendedInterface = getInterface(interfacePath, extendedInterfaceName);
+    extendInterface(matchedExtendedInterface, interfacePath, newElements, values);
+    setElements(matchedExtendedInterface, interfacePath, newElements, values);
+  }
 }
 
 /**
@@ -92,23 +107,6 @@ function parse(content) {
 }
 
 /**
- * Finds the required interface
- * @param filename
- * @param namedInterface
- */
-function getInterface(interfacePath, namedInterface) {
-
-  // reference to current file
-  const interfaceFile = ast.getOrAddSourceFileFromFilePath(interfacePath);
-
-  const matchedInterface = interfaceFile.getInterface(namedInterface);
-
-  // does the interface exist in current file?
-  return matchedInterface;
-
-}
-
-/**
  *
  * @param properties
  * @param filename
@@ -122,8 +120,6 @@ function setElements(matchedInterface, filename, newElements, values, inttype?) 
 
   properties.forEach((prop: any) => {
 
-    const name = prop.getName();
-
     let propType = prop.getType().getText();
 
     const description = prop.getDocumentationComment() || '&nbsp;';
@@ -131,8 +127,6 @@ function setElements(matchedInterface, filename, newElements, values, inttype?) 
     const typeDef = inttype ? `${inttype}.${prop.getName()}` : prop.getName();
 
     let typeInterface;
-
-    console.log('type', propType);
 
     if (propType !== 'boolean' && propType !== 'string' && propType !== 'number') {
       typeInterface = getInterface(filename, propType.replace('[]', ''));
@@ -182,6 +176,23 @@ function setElements(matchedInterface, filename, newElements, values, inttype?) 
     }
 
   });
+
+}
+
+/**
+ * Finds the required interface
+ * @param filename
+ * @param namedInterface
+ */
+function getInterface(interfacePath, namedInterface) {
+
+  // reference to current file
+  const interfaceFile = ast.getOrAddSourceFileFromFilePath(interfacePath);
+
+  const matchedInterface = interfaceFile.getInterface(namedInterface);
+
+  // does the interface exist in current file?
+  return matchedInterface;
 
 }
 
