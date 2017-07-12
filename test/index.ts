@@ -1,21 +1,25 @@
-import { Employer } from './interfaces';
-
-interface Shape {
+interface SquareConfig {
     color: string;
-    radius: number;
+    width: number;
 }
 
-interface Square extends Shape {
-    sideLength: number;
+/**
+ * @api {get} /api/:id
+ * @apiParam {SquareConfig} id Unique ID.
+ * @apiInterface {SquareConfig}
+ * @apiGroup localInterfaceTest
+ */
+export function localInterfaceTest(): SquareConfig {
+  return {color: 'red', width: 20};
 }
 
 /**
  * @api {get} /api/:id
  * @apiParam {Number} id Unique ID.
- * @apiInterface {Square}
- * @apiGroup localInterfaceTest
+ * @apiInterface (./test/interfaces.ts) { InnerSquare }
+ * @apiGroup extendInterfaceTest
  */
-export function localInterfaceTest() {
+export function extendInterfaceTest() {
   return false;
 }
 

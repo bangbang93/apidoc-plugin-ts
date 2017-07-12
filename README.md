@@ -5,7 +5,7 @@
 [![Greenkeeper badge](https://badges.greenkeeper.io/tgreyuk/apidoc-plugin-ts.svg)](https://greenkeeper.io/)
 
 A plugin for [apidoc](https://www.npmjs.com/package/apidoc) that injects @apiSuccess properties from TypeScript interfaces.
-Supports nested interfaces and objects.
+Supports extended and nested interfaces and objects.
 
 ## Getting started
 

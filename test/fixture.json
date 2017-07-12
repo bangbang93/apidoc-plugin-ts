@@ -23,12 +23,69 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
+            "field": "color",
+            "description": "<p>Shape color</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "radius",
+            "description": "<p>Shape radius</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "sideLength",
+            "description": "<p>Extended Square sidelength</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "bottomLength",
+            "description": "<p>Extended Innershape bottomlength</p>"
+          }
+        ]
+      }
+    },
+    "group": "extendInterfaceTest",
+    "version": "0.0.0",
+    "filename": "test/index.ts",
+    "groupTitle": "extendInterfaceTest",
+    "name": "GetApiId"
+  },
+  {
+    "type": "get",
+    "url": "/api/:id",
+    "title": "",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
             "field": "jobTitle",
             "description": "<p>The job title string</p>"
           },
           {
             "group": "Success 200",
-            "type": "Iperson",
+            "type": "Person",
             "optional": false,
             "field": "person",
             "description": "<p>The IPerson Interface</p>"
@@ -70,7 +127,7 @@
           },
           {
             "group": "Success 200",
-            "type": "Ilocation",
+            "type": "Location",
             "optional": false,
             "field": "person.address.location",
             "description": "<p>Location</p>"
@@ -112,7 +169,7 @@
           },
           {
             "group": "Success 200",
-            "type": "Iskill[]",
+            "type": "Skill[]",
             "optional": false,
             "field": "skills",
             "description": "<p>An array of ISkill interfaces</p>"
@@ -149,7 +206,7 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "SquareConfig",
             "optional": false,
             "field": "id",
             "description": "<p>Unique ID.</p>"
@@ -164,22 +221,15 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "name",
-            "description": "<p>Name</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "position",
-            "description": "<p>Position</p>"
+            "field": "color",
+            "description": "<p> </p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "height",
-            "description": "<p>Height</p>"
+            "field": "width",
+            "description": "<p> </p>"
           }
         ]
       }

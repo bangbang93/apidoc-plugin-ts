@@ -60,3 +60,28 @@ export interface Location {
     b: string;
   };
 }
+
+export interface Shape {
+    /**
+     * Shape color
+     */
+    color: string;
+    /**
+     * Shape radius
+     */
+    radius: number;
+}
+
+export interface Square extends Shape {
+    /**
+     * Extended Square sidelength
+     */
+    sideLength: number;
+}
+
+export interface InnerSquare extends Square {
+    /**
+     * Extended Innershape bottomlength
+     */
+    bottomLength: number;
+}
