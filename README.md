@@ -19,7 +19,7 @@ A custom api-doc param "@apiInterface" is the exposed:
 @apiInterface (optional path) {INTERFACE_NAME}
  ```
 
- ## Example
+## Example
 
 Given the following interface:
 
