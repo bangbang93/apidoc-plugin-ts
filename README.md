@@ -21,7 +21,7 @@ A custom api-doc param "@apiInterface" is the exposed:
 
 
 
- ### How to use
+ ## Example
 
 Given the following interface:
 
