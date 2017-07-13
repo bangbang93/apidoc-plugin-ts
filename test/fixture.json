@@ -144,21 +144,21 @@
             "type": "String",
             "optional": false,
             "field": "person.address.location.city",
-            "description": "<p> </p>"
+            "description": "<p>‐</p>"
           },
           {
             "group": "Success 200",
             "type": "Region",
             "optional": false,
             "field": "person.address.location.region",
-            "description": "<p> </p>"
+            "description": "<p>‐</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "person.address.location.region.a",
-            "description": "<p> </p>"
+            "description": "<p>‐</p>"
           },
           {
             "group": "Success 200",
@@ -179,14 +179,14 @@
             "type": "String",
             "optional": false,
             "field": "skills.description",
-            "description": "<p> </p>"
+            "description": "<p>‐</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
             "field": "skills.level",
-            "description": "<p> </p>"
+            "description": "<p>‐</p>"
           }
         ]
       }
@@ -222,14 +222,14 @@
             "type": "String",
             "optional": false,
             "field": "color",
-            "description": "<p> </p>"
+            "description": "<p>‐</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
             "field": "width",
-            "description": "<p> </p>"
+            "description": "<p>‐</p>"
           }
         ]
       }

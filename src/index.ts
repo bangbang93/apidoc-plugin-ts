@@ -122,7 +122,7 @@ function setElements(matchedInterface, filename, newElements, values, inttype?) 
 
     let propType = prop.getType().getText();
 
-    const description = prop.getDocumentationComment() || '&nbsp;';
+    const description = prop.getDocumentationComment() || '&dash;';
 
     const typeDef = inttype ? `${inttype}.${prop.getName()}` : prop.getName();
 
@@ -154,7 +154,7 @@ function setElements(matchedInterface, filename, newElements, values, inttype?) 
           const valueDeclaration = property._compilerSymbol.valueDeclaration;
           const propName = property.getName();
           propType = valueDeclaration.type.getText();
-          const desc = valueDeclaration.jsDoc ? valueDeclaration.jsDoc[0].comment : '&nbsp;';
+          const desc = valueDeclaration.jsDoc ? valueDeclaration.jsDoc[0].comment : '&dash;';
 
           newElements.push({
             content: `{${capitalize(propType)}} ${typeDef}.${propName} ${desc}\n`,
