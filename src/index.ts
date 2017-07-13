@@ -129,10 +129,12 @@ function setElements(matchedInterface, filename, newElements, values, inttype?) 
     let typeInterface;
 
     if (propType !== 'boolean' && propType !== 'string' && propType !== 'number') {
+
       typeInterface = getInterface(filename, propType.replace('[]', ''));
-      if (!typeInterface) {
-        propType = prop.getName();
-      }
+
+      const isArray = propType.includes('[]');
+      propType = 'Object' + (isArray ? '[]' : '');
+
     }
 
     newElements.push({

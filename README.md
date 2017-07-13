@@ -44,10 +44,7 @@ export interface Employer {
 and the following custom param:
 
 ```javascript
-/**
- * @apiInterface (./employers.ts) {Person}
- */
-
+ @apiInterface (./employers.ts) {Person}
  ```
 
  under the hood this would transpile to:

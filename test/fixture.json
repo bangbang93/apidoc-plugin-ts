@@ -85,7 +85,7 @@
           },
           {
             "group": "Success 200",
-            "type": "Person",
+            "type": "Object",
             "optional": false,
             "field": "person",
             "description": "<p>The IPerson Interface</p>"
@@ -106,7 +106,7 @@
           },
           {
             "group": "Success 200",
-            "type": "Address",
+            "type": "Object",
             "optional": false,
             "field": "person.address",
             "description": "<p>The Address Object</p>"
@@ -148,7 +148,7 @@
           },
           {
             "group": "Success 200",
-            "type": "Region",
+            "type": "Object",
             "optional": false,
             "field": "person.address.location.region",
             "description": "<p>‐</p>"
@@ -169,7 +169,7 @@
           },
           {
             "group": "Success 200",
-            "type": "Skill[]",
+            "type": "Object[]",
             "optional": false,
             "field": "skills",
             "description": "<p>An array of ISkill interfaces</p>"
