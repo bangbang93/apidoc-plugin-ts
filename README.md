@@ -1,7 +1,7 @@
 # apidoc-plugin-ts
 
-[![Build Status](https://travis-ci.org/tgreyuk/apidoc-plugin-ts.svg?branch=master)](https://travis-ci.org/tgreyuk/typedoc-plugin-markdown)
-[![npm](https://img.shields.io/npm/v/apidoc-plugin-ts.svg)](https://www.npmjs.com/package/typedoc-plugin-markdown)
+[![Build Status](https://travis-ci.org/tgreyuk/apidoc-plugin-ts.svg?branch=master)](https://travis-ci.org/tgreyuk/apidoc-plugin-ts)
+[![npm](https://img.shields.io/npm/v/apidoc-plugin-ts.svg)](https://www.npmjs.com/package/apidoc-plugin-ts)
 [![Greenkeeper badge](https://badges.greenkeeper.io/tgreyuk/apidoc-plugin-ts.svg)](https://greenkeeper.io/)
 
 A plugin for [apidoc](https://www.npmjs.com/package/apidoc) that injects @apiSuccess properties from TypeScript interfaces.
