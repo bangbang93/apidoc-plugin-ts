@@ -1,7 +1,7 @@
 {
   "name": "apidoc-plugin-ts",
   "version": "0.0.2",
-  "description": "",
+  "description": "A plugin for apidoc leveraging TypeScript interfaces.",
   "main": "dist/index.js",
   "files": [
     "dist/"
