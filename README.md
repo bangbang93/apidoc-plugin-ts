@@ -13,7 +13,7 @@ Supports extended and nested interfaces.
 npm install --save-dev apidoc apidoc-plugin-ts
 ```
 
-A custom api-doc param "@apiInterface" is the exposed:
+A custom api-doc param "@apiInterface" is exposed:
 
 ```javascript
 @apiInterface (optional path) {INTERFACE_NAME}
@@ -52,7 +52,7 @@ and the following custom param:
 ```javascript
  @apiSuccess {String} jobTitle Job title
  @apiSuccess {Object} personalDetails Empoyer personal details
- @apiSuccess {String} personalDetails.name 
+ @apiSuccess {String} personalDetails.name
  @apiSuccess {Number} personalDetails.age 
 ```
 

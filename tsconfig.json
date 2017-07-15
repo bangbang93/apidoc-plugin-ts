@@ -9,7 +9,7 @@
     "moduleResolution": "node",
     "noEmitHelpers": false,
     "noImplicitAny": false,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "removeComments": true,
     "sourceMap": false,
     "strictNullChecks": false,

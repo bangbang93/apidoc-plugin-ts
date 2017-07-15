@@ -22,6 +22,7 @@ export interface Person {
    * The age of the person
    */
   age: number;
+  dateOfBirth: Date;
   /**
    * The Address Object
    */
@@ -62,26 +63,18 @@ export interface Location {
 }
 
 export interface Shape {
-    /**
-     * Shape color
-     */
+
     color: string;
-    /**
-     * Shape radius
-     */
+
     radius: number;
 }
 
 export interface Square extends Shape {
-    /**
-     * Extended Square sidelength
-     */
+
     sideLength: number;
 }
 
 export interface InnerSquare extends Square {
-    /**
-     * Extended Innershape bottomlength
-     */
+
     bottomLength: number;
 }

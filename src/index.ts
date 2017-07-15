@@ -1,4 +1,4 @@
-import Ast from 'ts-simple-ast';
+import Ast, { InterfaceDeclaration } from 'ts-simple-ast';
 
 const ast = new Ast();
 
@@ -25,20 +25,20 @@ function parseElements(elements, element, block, filename) {
     // remove the element
     elements.pop();
 
+    // create array of new elements
+    const newElements = [];
+
     // get object values
     const values = parse(element.content);
 
     // the interface we are looking for
     const namedInterface = values.interface.trim();
 
-    // does the interface exist in current file?
+    // get the file path to the interface
     const interfacePath = values.path ? values.path.trim() : filename;
 
     // does the interface exist in current file?
     const matchedInterface = getInterface(interfacePath, namedInterface);
-
-    // create array of new elements
-    const newElements = [];
 
     // if interface found do something with it
     if (matchedInterface) {
@@ -47,7 +47,7 @@ function parseElements(elements, element, block, filename) {
       extendInterface(matchedInterface, interfacePath, newElements, values);
 
       // match elemenets of current interface
-      setElements(matchedInterface, interfacePath, newElements, values);
+      setInterfaceElements(matchedInterface, interfacePath, newElements, values);
 
       // push new elements into existing elements
       for (let i = 0, l = newElements.length; i < l; i++) {
@@ -70,13 +70,13 @@ function parseElements(elements, element, block, filename) {
  * @param newElements
  * @param values
  */
-function extendInterface(matchedInterface, interfacePath, newElements, values) {
+function extendInterface(matchedInterface: InterfaceDeclaration, interfacePath, newElements, values) {
   const extendedInterface = matchedInterface.getExtends()[0];
   if (extendedInterface) {
     const extendedInterfaceName = matchedInterface.getExtends()[0].compilerNode.expression.getText();
     const matchedExtendedInterface = getInterface(interfacePath, extendedInterfaceName);
     extendInterface(matchedExtendedInterface, interfacePath, newElements, values);
-    setElements(matchedExtendedInterface, interfacePath, newElements, values);
+    setInterfaceElements(matchedExtendedInterface, interfacePath, newElements, values);
   }
 }
 
@@ -98,11 +98,9 @@ function parse(content) {
   }
 
   return {
-
     element: matches[3] || 'apiSuccess',
     interface: matches[2],
     path: matches[1],
-
   };
 }
 
@@ -114,67 +112,45 @@ function parse(content) {
  * @param values
  * @param inttype
  */
-function setElements(matchedInterface, filename, newElements, values, inttype?) {
+function setInterfaceElements(matchedInterface: InterfaceDeclaration, filename, newElements, values, inttype?) {
 
-  const properties = matchedInterface.getProperties();
+  // iterate over interface properties
+  matchedInterface.getProperties().forEach((prop) => {
 
-  properties.forEach((prop: any) => {
-
-    let propType = prop.getType().getText();
-
-    const description = prop.getDocumentationComment() || '&dash;';
-
+    // set param type definition and description
     const typeDef = inttype ? `${inttype}.${prop.getName()}` : prop.getName();
+    const descriptionPrefix = inttype ? `${inttype} > ` : '';
+    const description = descriptionPrefix + (prop.getDocumentationComment() || prop.getName());
 
-    let typeInterface;
+    // set property type as a string
+    const propType = prop.getType().getText();
 
-    if (propType !== 'boolean' && propType !== 'string' && propType !== 'number') {
+    // set property type label
+    let propLabel = propType;
 
-      typeInterface = getInterface(filename, propType.replace('[]', ''));
+    // determine if the type is an object
+    const propTypeIsObject = !isNativeType(propType);
 
+    // if type is an object change label
+    if (propTypeIsObject) {
       const isArray = propType.includes('[]');
-      propType = 'Object' + (isArray ? '[]' : '');
-
+      propLabel = 'Object' + (isArray ? '[]' : '');
     }
 
-    newElements.push({
-      content: `{${capitalize(propType)}} ${typeDef} ${description}\n`,
-      name: 'apisuccess',
-      source: `@apiSuccess {${capitalize(propType)}} ${typeDef} ${description}\n`,
-      sourceName: 'apiSuccess',
-    });
+    // set the element
+    newElements.push(getParam(`{${capitalize(propLabel)}} ${typeDef} ${description}`));
 
-    if (propType !== 'boolean' && propType !== 'string' && propType !== 'number') {
+    // if property is an object or interface then we need to also display the objects properties
+    if (propTypeIsObject) {
 
+      // first determine if the object is an available interface
+      const typeInterface = getInterface(filename, propType.replace('[]', ''));
       if (typeInterface) {
-
-        setElements(typeInterface, filename, newElements, values, typeDef);
-
+        setInterfaceElements(typeInterface, filename, newElements, values, typeDef);
       } else {
-
-        prop.getType().getProperties().forEach((property) => {
-          const valueDeclaration = property._compilerSymbol.valueDeclaration;
-          const propName = property.getName();
-          propType = valueDeclaration.type.getText();
-          const desc = valueDeclaration.jsDoc ? valueDeclaration.jsDoc[0].comment : '&dash;';
-
-          newElements.push({
-            content: `{${capitalize(propType)}} ${typeDef}.${propName} ${desc}\n`,
-            name: 'apisuccess',
-            source: `@apiSuccess {${capitalize(propType)}} ${typeDef}.${propName} ${desc}\n`,
-            sourceName: 'apiSuccess',
-          });
-
-          if (propType !== 'boolean' && propType !== 'string' && propType !== 'number') {
-            typeInterface = getInterface(filename, propType);
-            if (typeInterface) {
-              setElements(typeInterface, filename, newElements, values, typeDef + '.' + propName);
-            } else {
-              propType = prop.getName();
-            }
-          }
-        });
+        setObjectElements(prop, filename, newElements, values, typeDef);
       }
+
     }
 
   });
@@ -182,20 +158,54 @@ function setElements(matchedInterface, filename, newElements, values, inttype?) 
 }
 
 /**
- * Finds the required interface
+ * Set element if type object
+ */
+function setObjectElements(prop, filename, newElements, values, typeDef) {
+
+    prop.getType().getProperties().forEach((property) => {
+
+      const valueDeclaration = property._compilerSymbol.valueDeclaration;
+      const propName = property.getName();
+      const typeDefLabel = `${typeDef}.${propName}`;
+      const propType = valueDeclaration.type.getText();
+      const desc = (typeDef.replace(/\./g, ' &gt; ')) +
+        ' &gt; ' + (valueDeclaration.jsDoc ? valueDeclaration.jsDoc[0].comment : propName);
+
+      newElements.push(getParam(`{${capitalize(propType)}} ${typeDefLabel} ${desc}`));
+
+      // if property is an object or interface then we need to also display the objects properties
+      if (!isNativeType(propType)) {
+        const typeInterface = getInterface(filename, propType);
+        if (typeInterface) {
+          setInterfaceElements(typeInterface, filename, newElements, values, typeDefLabel);
+        } else {
+          setObjectElements(property, filename, newElements, values, typeDef);
+        }
+      }
+
+    });
+}
+
+/**
+ * Returns parameter object
+ */
+function getParam(param) {
+  return {
+    content: `${param}\n`,
+    name: 'apisuccess',
+    source: `@apiSuccess ${param}\n`,
+    sourceName: 'apiSuccess',
+  };
+}
+
+/**
+ * Finds the required interface from a given file path
  * @param filename
  * @param namedInterface
  */
 function getInterface(interfacePath, namedInterface) {
-
-  // reference to current file
   const interfaceFile = ast.getOrAddSourceFileFromFilePath(interfacePath);
-
-  const matchedInterface = interfaceFile.getInterface(namedInterface);
-
-  // does the interface exist in current file?
-  return matchedInterface;
-
+  return interfaceFile.getInterface(namedInterface);
 }
 
 /**
@@ -203,4 +213,13 @@ function getInterface(interfacePath, namedInterface) {
  */
 function capitalize(text: string) {
   return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+}
+
+/**
+ *
+ * @param propType Returns true if a native type
+ */
+function isNativeType(propType) {
+  const nativeTypes = ['boolean', 'string', 'number', 'Date'];
+  return nativeTypes.indexOf(propType) >= 0;
 }
