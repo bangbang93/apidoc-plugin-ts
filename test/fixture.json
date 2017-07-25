@@ -21,6 +21,91 @@
         "Success 200": [
           {
             "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "picks",
+            "description": "<p>picks</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "picks.id",
+            "description": "<p>picks &gt; id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "picks.webName",
+            "description": "<p>picks &gt; webName</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "picks.stats",
+            "description": "<p>picks &gt; stats</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "picks.stats.totalGoals",
+            "description": "<p>picks.stats &gt; totalGoals</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "picks.stats.timesBenched",
+            "description": "<p>picks.stats &gt; timesBenched</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "picks.stats.timesCaptained",
+            "description": "<p>picks.stats &gt; timesCaptained</p>"
+          }
+        ]
+      }
+    },
+    "group": "deepExtendsInterfaceTest",
+    "version": "0.0.0",
+    "filename": "test/index.ts",
+    "groupTitle": "deepExtendsInterfaceTest",
+    "name": "GetApiId"
+  },
+  {
+    "type": "get",
+    "url": "/api/:id",
+    "title": "",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "color",

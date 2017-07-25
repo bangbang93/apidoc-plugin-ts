@@ -36,6 +36,16 @@ export function importedInterfaceTest() {
 /**
  * @api {get} /api/:id
  * @apiParam {Number} id Unique ID.
+ * @apiInterface (./test/interfaces.ts) { TeamPicks }
+ * @apiGroup deepExtendsInterfaceTest
+ */
+export function deepExtendsInterfaceTest() {
+  return false;
+}
+
+/**
+ * @api {get} /api/:id
+ * @apiParam {Number} id Unique ID.
  * @apiInterface {X}
  * @apiGroup notFoundTest
  */

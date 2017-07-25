@@ -78,3 +78,22 @@ export interface InnerSquare extends Square {
 
     bottomLength: number;
 }
+
+export interface TeamPicks {
+  id: number;
+  picks: TeamPick[];
+}
+
+export interface TeamPick {
+    id: number;
+    webName: string;
+    stats: TeamPickStats;
+}
+export interface TeamPickStats extends PlayerStats {
+    timesBenched: number;
+    timesCaptained: number;
+}
+
+export interface PlayerStats {
+  totalGoals: number;
+}

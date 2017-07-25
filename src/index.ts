@@ -43,9 +43,6 @@ function parseElements(elements, element, block, filename) {
     // if interface found do something with it
     if (matchedInterface) {
 
-      // if this is an extended interface
-      extendInterface(matchedInterface, interfacePath, newElements, values);
-
       // match elemenets of current interface
       setInterfaceElements(matchedInterface, interfacePath, newElements, values);
 
@@ -61,23 +58,6 @@ function parseElements(elements, element, block, filename) {
   }
 
   return elements;
-}
-
-/**
- * Extends the current interface
- * @param matchedInterface
- * @param interfacePath
- * @param newElements
- * @param values
- */
-function extendInterface(matchedInterface: InterfaceDeclaration, interfacePath, newElements, values) {
-  const extendedInterface = matchedInterface.getExtends()[0];
-  if (extendedInterface) {
-    const extendedInterfaceName = matchedInterface.getExtends()[0].compilerNode.expression.getText();
-    const matchedExtendedInterface = getInterface(interfacePath, extendedInterfaceName);
-    extendInterface(matchedExtendedInterface, interfacePath, newElements, values);
-    setInterfaceElements(matchedExtendedInterface, interfacePath, newElements, values);
-  }
 }
 
 /**
@@ -113,6 +93,9 @@ function parse(content) {
  * @param inttype
  */
 function setInterfaceElements(matchedInterface: InterfaceDeclaration, filename, newElements, values, inttype?) {
+
+  // if this is an extended interface
+  extendInterface(matchedInterface, filename, newElements, values, inttype);
 
   // iterate over interface properties
   matchedInterface.getProperties().forEach((prop) => {
@@ -184,6 +167,23 @@ function setObjectElements(prop, filename, newElements, values, typeDef) {
       }
 
     });
+}
+
+/**
+ * Extends the current interface
+ * @param matchedInterface
+ * @param interfacePath
+ * @param newElements
+ * @param values
+ */
+function extendInterface(matchedInterface: InterfaceDeclaration, interfacePath, newElements, values, inttype?) {
+  const extendedInterface = matchedInterface.getExtends()[0];
+  if (extendedInterface) {
+    const extendedInterfaceName = matchedInterface.getExtends()[0].compilerNode.expression.getText();
+    const matchedExtendedInterface = getInterface(interfacePath, extendedInterfaceName);
+    extendInterface(matchedExtendedInterface, interfacePath, newElements, values);
+    setInterfaceElements(matchedExtendedInterface, interfacePath, newElements, values, inttype);
+  }
 }
 
 /**
