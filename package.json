@@ -48,6 +48,12 @@
     "typescript": "^2.4.2"
   },
   "dependencies": {
-    "ts-simple-ast": "^0.44.1"
+    "ts-simple-ast": "^0.48.0"
+  },
+  "greenkeeper": {
+    "ignore": [
+      "ts-simple-ast",
+      "typescript"
+    ]
   }
 }
