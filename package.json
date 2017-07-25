@@ -44,11 +44,11 @@
     "copyfiles": "^1.2.0",
     "mocha": "^3.4.2",
     "ts-node": "^3.2.0",
-    "tslint": "^5.5.0",
-    "typescript": "^2.4.2"
+    "tslint": "^5.5.0"
   },
   "dependencies": {
-    "ts-simple-ast": "^0.48.0"
+    "ts-simple-ast": "0.48.0",
+    "typescript": "2.4.1"
   },
   "greenkeeper": {
     "ignore": [
