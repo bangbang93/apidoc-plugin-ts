@@ -44,6 +44,16 @@ export function deepExtendsInterfaceTest() {
 }
 
 /**
+ * @api {get} /api/all
+ * @apiParam {Number} id Unique ID.
+ * @apiInterface  { SquareConfig[] }
+ * @apiGroup arrayInterfaceTest
+ */
+export function arrayInterfaceTest() {
+  return false;
+}
+
+/**
  * @api {get} /api/:id
  * @apiParam {Number} id Unique ID.
  * @apiInterface {X}

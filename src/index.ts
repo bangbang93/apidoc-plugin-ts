@@ -34,6 +34,16 @@ function parseElements(elements, element, block, filename) {
     // the interface we are looking for
     const namedInterface = values.interface.trim();
 
+    // if it is an array get the correct name
+    const isArray = namedInterface.includes('[]');
+    if (isArray) {
+      elements.push(
+        getParam(
+          `{Object[]} --root-- A collection of players. See <a href="#api-deepExtendsInterfaceTest">GetPlayer</a>`),
+      );
+      return;
+    }
+
     // get the file path to the interface
     const interfacePath = values.path ? values.path.trim() : filename;
 
