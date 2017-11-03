@@ -1,4 +1,4 @@
-import { SearchAttributes } from './interfaces2';
+import { Location, SearchAttributes } from './interfaces2';
 
 export interface Employer {
   /**
@@ -41,21 +41,6 @@ export interface Person {
      * Location
      */
     location: Location
-  };
-}
-
-export interface Location {
-  /**
-   * Country
-   */
-  country: string;
-  city: string;
-  region: {
-    a: string;
-    /**
-     * b prop
-     */
-    b: string;
   };
 }
 
