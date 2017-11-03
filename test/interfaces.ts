@@ -44,6 +44,21 @@ export interface Person {
   };
 }
 
+export interface Location {
+  /**
+   * Country
+   */
+  country: string;
+  city: string;
+  region: {
+    a: string;
+    /**
+     * b prop
+     */
+    b: string;
+  };
+}
+
 export interface Skill {
   description: string;
   level: number;
