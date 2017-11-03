@@ -145,28 +145,28 @@ function setInterfaceElements(matchedInterface: InterfaceDeclaration, filename, 
  */
 function setObjectElements(prop, filename, newElements, values, typeDef) {
 
-    prop.getType().getProperties().forEach((property) => {
+  prop.getType().getProperties().forEach((property) => {
 
-      const valueDeclaration = property._compilerSymbol.valueDeclaration;
-      const propName = property.getName();
-      const typeDefLabel = `${typeDef}.${propName}`;
-      const propType = valueDeclaration.type.getText();
-      const desc = (typeDef.replace(/\./g, ' &gt; ')) +
-        ' &gt; ' + (valueDeclaration.jsDoc ? valueDeclaration.jsDoc[0].comment : propName);
+    const valueDeclaration = property._compilerSymbol.valueDeclaration;
+    const propName = property.getName();
+    const typeDefLabel = `${typeDef}.${propName}`;
+    const propType = valueDeclaration.type.getText();
+    const desc = (typeDef.replace(/\./g, ' &gt; ')) +
+      ' &gt; ' + (valueDeclaration.jsDoc ? valueDeclaration.jsDoc[0].comment : propName);
 
-      newElements.push(getParam(`{${capitalize(propType)}} ${typeDefLabel} ${desc}`));
+    newElements.push(getParam(`{${capitalize(propType)}} ${typeDefLabel} ${desc}`));
 
-      // if property is an object or interface then we need to also display the objects properties
-      if (!isNativeType(propType)) {
-        const typeInterface = getInterface(filename, propType);
-        if (typeInterface) {
-          setInterfaceElements(typeInterface, filename, newElements, values, typeDefLabel);
-        } else {
-          setObjectElements(property, filename, newElements, values, typeDef);
-        }
+    // if property is an object or interface then we need to also display the objects properties
+    if (!isNativeType(propType)) {
+      const typeInterface = getInterface(filename, propType);
+      if (typeInterface) {
+        setInterfaceElements(typeInterface, filename, newElements, values, typeDefLabel);
+      } else {
+        setObjectElements(property, filename, newElements, values, typeDef);
       }
+    }
 
-    });
+  });
 }
 
 /**
@@ -204,7 +204,7 @@ function getParam(param) {
  * @param namedInterface
  */
 function getInterface(interfacePath, namedInterface) {
-  const interfaceFile = ast.getOrAddSourceFileFromFilePath(interfacePath);
+  const interfaceFile = ast.getOrAddSourceFile(interfacePath);
   return interfaceFile.getInterface(namedInterface);
 }
 
@@ -220,6 +220,6 @@ function capitalize(text: string) {
  * @param propType Returns true if a native type
  */
 function isNativeType(propType) {
-  const nativeTypes = ['boolean', 'string', 'number', 'Date'];
+  const nativeTypes = ['boolean', 'string', 'number', 'Date', 'any'];
   return nativeTypes.indexOf(propType) >= 0;
 }
