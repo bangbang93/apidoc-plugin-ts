@@ -9,10 +9,10 @@
   "scripts": {
     "apidoc": "apidoc -i test/ -o test/out",
     "copy:plugin": "rm -rf node_modules/apidoc-plugin-ts && copyfiles package.json './dist/**/*' node_modules/apidoc-plugin-ts/",
-    "lint": "tslint --type-check --project tsconfig.json",
+    "lint": "tslint --project tsconfig.json",
     "test": "mocha -r ts-node/register test/**/test.ts",
     "prepare": "rm -rf dist && tsc -p src/tsconfig.json",
-    "prepublish": "npm run prepare && npm run lint && npm run test",
+    "prepublishOnly": "npm run prepare && npm run lint && npm run test",
     "pretest": "rm -rf test/out && npm run copy:plugin && npm run apidoc"
   },
   "author": "Tom Grey",
@@ -36,19 +36,19 @@
     "apidoc": "^0.17.6"
   },
   "devDependencies": {
-    "@types/chai": "^4.0.1",
-    "@types/mocha": "^2.2.41",
-    "@types/node": "^8.0.10",
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.44",
+    "@types/node": "^8.0.47",
     "apidoc": "^0.17.6",
-    "chai": "^4.1.0",
+    "chai": "^4.1.2",
     "copyfiles": "^1.2.0",
-    "mocha": "^3.4.2",
-    "ts-node": "^3.2.0",
-    "tslint": "^5.5.0"
+    "mocha": "^4.0.1",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.8.0"
   },
   "dependencies": {
-    "ts-simple-ast": "0.48.0",
-    "typescript": "2.4.1"
+    "ts-simple-ast": "0.81.0",
+    "typescript": "2.6.1"
   },
   "greenkeeper": {
     "ignore": [

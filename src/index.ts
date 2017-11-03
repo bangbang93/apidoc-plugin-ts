@@ -204,7 +204,7 @@ function getParam(param) {
  * @param namedInterface
  */
 function getInterface(interfacePath, namedInterface) {
-  const interfaceFile = ast.getOrAddSourceFileFromFilePath(interfacePath);
+  const interfaceFile = ast.getOrAddSourceFile(interfacePath);
   return interfaceFile.getInterface(namedInterface);
 }
 
