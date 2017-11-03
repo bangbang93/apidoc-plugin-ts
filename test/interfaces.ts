@@ -1,3 +1,5 @@
+import {Location} from './interfaces1';
+
 export interface Employer {
   /**
    * The job title string
@@ -45,21 +47,6 @@ export interface Person {
 export interface Skill {
   description: string;
   level: number;
-}
-
-export interface Location {
-  /**
-   * Country
-   */
-  country: string;
-  city: string;
-  region: {
-    a: string;
-    /**
-     * b prop
-     */
-    b: string;
-  };
 }
 
 export interface Shape {

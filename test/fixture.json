@@ -260,6 +260,13 @@
             "description": "<p>person &gt; address &gt; location &gt; region &gt; b prop</p>"
           },
           {
+            "description": "<p>person &gt; ext</p>",
+             "field": "person.ext",
+             "group": "Success 200",
+             "optional": false,
+             "type": "Object"
+          },
+          {
             "group": "Success 200",
             "type": "Object[]",
             "optional": false,
