@@ -46,6 +46,16 @@ export function deepExtendsInterfaceTest() {
 /**
  * @api {get} /api/:id
  * @apiParam {Number} id Unique ID.
+ * @apiInterface (./test/interfaces.ts) { SearchResult }
+ * @apiGroup deepExternalInterfaceTest
+ */
+export function deepExternalInterfaceTest() {
+  return false;
+}
+
+/**
+ * @api {get} /api/:id
+ * @apiParam {Number} id Unique ID.
  * @apiInterface {X}
  * @apiGroup notFoundTest
  */

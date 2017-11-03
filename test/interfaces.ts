@@ -1,3 +1,5 @@
+import { SearchAttributes } from './interfaces2';
+
 export interface Employer {
   /**
    * The job title string
@@ -64,19 +66,19 @@ export interface Location {
 
 export interface Shape {
 
-    color: string;
+  color: string;
 
-    radius: number;
+  radius: number;
 }
 
 export interface Square extends Shape {
 
-    sideLength: number;
+  sideLength: number;
 }
 
 export interface InnerSquare extends Square {
 
-    bottomLength: number;
+  bottomLength: number;
 }
 
 export interface TeamPicks {
@@ -85,15 +87,46 @@ export interface TeamPicks {
 }
 
 export interface TeamPick {
-    id: number;
-    webName: string;
-    stats: TeamPickStats;
+  id: number;
+  webName: string;
+  stats: TeamPickStats;
 }
 export interface TeamPickStats extends PlayerStats {
-    timesBenched: number;
-    timesCaptained: number;
+  timesBenched: number;
+  timesCaptained: number;
 }
 
 export interface PlayerStats {
   totalGoals: number;
+}
+
+export interface SearchResult {
+  data: SearchAttributes;
+  highlight: any;
+  org?: {
+    id: string,
+    fullname: string,
+  };
+  workspace?: {
+    id: string,
+    fullname: string,
+  };
+  parentMission?: {
+    id: string,
+    title: string,
+  };
+  ref?: {
+    id: string,
+    title: string,
+  };
+  room?: {
+    _id: string,
+    id: string,
+    name: string,
+  };
+  user?: {
+    id: string,
+    nickname: string,
+    avatar: string,
+  };
 }
